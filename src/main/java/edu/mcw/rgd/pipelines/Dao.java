@@ -11,22 +11,20 @@ public class Dao {
 
     AbstractDAO adao = new AbstractDAO();
 
-    public int deleteManuallyCreatedQtlRsoAnnotations() throws Exception {
+    public int deleteManuallyCreatedQtlRsoAnnotations(int createdBy) throws Exception {
         String sql = "delete from FULL_ANNOT fa\n" +
-                "where fa.RGD_OBJECT_KEY=6\n" +
-                "and fa.ASPECT='S'\n" +
-                "and fa.LAST_MODIFIED_BY <> 181";
-        return adao.update(sql);
+                "WHERE fa.rgd_object_key=6 AND fa.aspect='S' AND fa.last_modified_by <> ?";
+        return adao.update(sql, createdBy);
     }
 
-    public int markAnnotationsForProcessing() throws Exception {
+    public int markAnnotationsForProcessing(int createdBy) throws Exception {
         String sql = "UPDATE FULL_ANNOT\n" +
                 "SET FULL_ANNOT.LAST_MODIFIED_DATE=to_date('01/01/1900', 'MM/DD/YYYY')\n" +
-                "WHERE FULL_ANNOT.LAST_MODIFIED_BY=181";
-        return adao.update(sql);
+                "WHERE FULL_ANNOT.LAST_MODIFIED_BY=?";
+        return adao.update(sql, createdBy);
     }
 
-    public int updateQtlRsoAnnotations() throws Exception {
+    public int updateQtlRsoAnnotations(int createdBy) throws Exception {
         String sql = "UPDATE FULL_ANNOT fa\n" +
                 "SET\n" +
                 "  (\n" +
@@ -49,7 +47,7 @@ public class Dao {
                 "  AND fa.ANNOTATED_OBJECT_RGD_ID = rgd_ids.RGD_ID\n" +
                 "  AND rgd_ids.OBJECT_STATUS      = 'ACTIVE'\n" +
                 "  )\n" +
-                "WHERE fa.LAST_MODIFIED_BY=181\n" +
+                "WHERE fa.LAST_MODIFIED_BY=?\n" +
                 "AND EXISTS\n" +
                 "  (SELECT ot.TERM,\n" +
                 "    qtls.QTL_SYMBOL,\n" +
@@ -63,18 +61,17 @@ public class Dao {
                 "  AND fa.ANNOTATED_OBJECT_RGD_ID = rgd_ids.RGD_ID\n" +
                 "  AND rgd_ids.OBJECT_STATUS      = 'ACTIVE'\n" +
                 ")";
-        return adao.update(sql);
+        return adao.update(sql, createdBy);
     }
 
-    public int deleteQtlRsoAnnotations() throws Exception {
-        String sql = "DELETE\n" +
-                "FROM FULL_ANNOT fa\n" +
-                "WHERE fa.LAST_MODIFIED_BY = 181\n" +
+    public int deleteQtlRsoAnnotations(int createdBy) throws Exception {
+        String sql = "DELETE FROM full_annot fa\n" +
+                "WHERE fa.last_modified_by=? " +
                 "AND fa.LAST_MODIFIED_DATE = to_date('01/01/1900', 'MM/DD/YYYY')";
-        return adao.update(sql);
+        return adao.update(sql, createdBy);
     }
 
-    public int insertQtlRsoAnnotations() throws Exception {
+    public int insertQtlRsoAnnotations(int createdBy) throws Exception {
         String sql = "INSERT\n" +
                 "INTO FULL_ANNOT\n" +
                 "  (\n" +
@@ -98,7 +95,7 @@ public class Dao {
                 "  a.*\n" +
                 "FROM\n" +
                 "  ( SELECT DISTINCT ot.TERM AS term,\n" +
-                "    qtls.RGD_ID             AS rgd_id,\n" +
+                "    qtls.rgd_id             AS rgd_id,\n" +
                 "    6                       AS rgd_object_key,\n" +
                 "    'RGD'                   AS data_src,\n" +
                 "    qtls.qtl_symbol         AS symbol,\n" +
@@ -108,9 +105,9 @@ public class Dao {
                 "    qtls.qtl_name           AS name,\n" +
                 "    sysdate                 AS created_date,\n" +
                 "    sysdate                 AS last_modified_date,\n" +
-                "    ot.TERM_ACC             AS term_acc,\n" +
-                "    181                     AS created_by,\n" +
-                "    181                     AS last_modified_by\n" +
+                "    ot.term_acc             AS term_acc,\n" +
+                "    ?                       AS created_by,\n" +
+                "    ?                       AS last_modified_by\n" +
                 "  FROM ONT_TERMS ot,\n" +
                 "    ONT_SYNONYMS os,\n" +
                 "    strains st,\n" +
@@ -133,9 +130,9 @@ public class Dao {
                 "    WHERE fa.TERM_ACC              = ot.TERM_ACC\n" +
                 "    AND fa.ANNOTATED_OBJECT_RGD_ID = qtls.rgd_id\n" +
                 "    AND fa.ref_rgd_id = fa1.ref_rgd_id\n" +
-                "    AND fa.last_modified_by = 181\n" +
+                "    AND fa.last_modified_by = ?\n" +
                 "    )\n" +
                 "  ) a";
-        return adao.update(sql);
+        return adao.update(sql, createdBy, createdBy, createdBy);
     }
 }

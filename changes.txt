@@ -1,3 +1,6 @@
+2019-10-24
+  moved hardcoded value of 181 (pipeline id) into properties file
+
 ver. 1.0.1 -- Oct 1, 2018
   moved from subversion to github
 

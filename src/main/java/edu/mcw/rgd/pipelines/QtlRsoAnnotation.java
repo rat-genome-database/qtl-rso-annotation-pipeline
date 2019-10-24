@@ -12,6 +12,7 @@ import org.springframework.core.io.FileSystemResource;
 public class QtlRsoAnnotation {
 
     private String version;
+    private int createdBy;
 
     Logger log = Logger.getRootLogger();
 
@@ -37,23 +38,23 @@ public class QtlRsoAnnotation {
         Dao dao = new Dao();
 
         // Delete manually created QTL-RSO annotations.
-        int rowsAffected = dao.deleteManuallyCreatedQtlRsoAnnotations();
+        int rowsAffected = dao.deleteManuallyCreatedQtlRsoAnnotations(getCreatedBy());
         log.info("Delete manually created annotations: "+rowsAffected);
 
         // Mark all annotations that were created by this pipeline: Last_modified=181
-        rowsAffected = dao.markAnnotationsForProcessing();
+        rowsAffected = dao.markAnnotationsForProcessing(getCreatedBy());
         log.info("Annotations marked for processing: "+rowsAffected);
 
         // Update valid annotations with the latest terms, names, symbols and last_modified_date
-        rowsAffected = dao.updateQtlRsoAnnotations();
+        rowsAffected = dao.updateQtlRsoAnnotations(getCreatedBy());
         log.info("Annotations updated: "+rowsAffected);
 
         // Delete obsolete annotations which are not touched by the update annotations updates
-        rowsAffected = dao.deleteQtlRsoAnnotations();
+        rowsAffected = dao.deleteQtlRsoAnnotations(getCreatedBy());
         log.info("Records deleted: "+rowsAffected);
 
         // Insert new annotations
-        rowsAffected = dao.insertQtlRsoAnnotations();
+        rowsAffected = dao.insertQtlRsoAnnotations(getCreatedBy());
         log.info("New records inserted: "+rowsAffected);
 
 
@@ -67,5 +68,13 @@ public class QtlRsoAnnotation {
 
     public String getVersion() {
         return version;
+    }
+
+    public void setCreatedBy(int createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public int getCreatedBy() {
+        return createdBy;
     }
 }
