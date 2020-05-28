@@ -1,3 +1,6 @@
+May 27, 2010
+  refactored code to clarify the logic and added better logging
+  
 May 10, 2020
   updated jar dependencies
 
