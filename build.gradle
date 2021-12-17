@@ -37,7 +37,7 @@ jar {
             'Built-By': System.getProperty('user.name'),
             'Built-Date': new Date(),
             'Built-JDK': System.getProperty('java.version'),
-            'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+            'Class-Path': configurations.implementation.collect { it.getName() }.join(' '),
             'Main-Class': mainClassName
         )
     }
