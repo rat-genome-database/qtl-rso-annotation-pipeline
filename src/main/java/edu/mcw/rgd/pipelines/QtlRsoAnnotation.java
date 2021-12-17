@@ -18,7 +18,7 @@ public class QtlRsoAnnotation {
     private String version;
     private int createdBy;
 
-    Logger log = LogManager.getRootLogger();
+    Logger log = LogManager.getLogger("status");
 
     public static void main(String[] args) throws Exception {
 
@@ -61,6 +61,7 @@ public class QtlRsoAnnotation {
 
         String msg = "=== OK === elapsed "+ Utils.formatElapsedTime(time0, System.currentTimeMillis());
         log.info(msg);
+        log.info("");
     }
 
     void qcAnnots( List<Annotation> incomingAnnots, List<Annotation> inRgdAnnots, Dao dao ) throws Exception {
