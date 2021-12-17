@@ -4,7 +4,8 @@ import edu.mcw.rgd.dao.DataSourceFactory;
 import edu.mcw.rgd.dao.impl.AnnotationDAO;
 import edu.mcw.rgd.datamodel.ontology.Annotation;
 import edu.mcw.rgd.process.Utils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,8 +22,8 @@ import java.util.List;
 public class Dao {
 
     AnnotationDAO adao = new AnnotationDAO();
-    Logger logInsertAnnots = Logger.getLogger("insertedAnnots");
-    Logger logDeleteAnnots = Logger.getLogger("deletedAnnots");
+    Logger logInsertAnnots = LogManager.getLogger("insertedAnnots");
+    Logger logDeleteAnnots = LogManager.getLogger("deletedAnnots");
 
     /*
     public int deleteManuallyCreatedQtlRsoAnnotations(int createdBy) throws Exception {
