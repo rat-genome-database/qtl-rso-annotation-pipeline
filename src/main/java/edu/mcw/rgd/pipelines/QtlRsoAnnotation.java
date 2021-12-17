@@ -2,7 +2,8 @@ package edu.mcw.rgd.pipelines;
 
 import edu.mcw.rgd.datamodel.ontology.Annotation;
 import edu.mcw.rgd.process.Utils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.FileSystemResource;
@@ -17,7 +18,7 @@ public class QtlRsoAnnotation {
     private String version;
     private int createdBy;
 
-    Logger log = Logger.getRootLogger();
+    Logger log = LogManager.getRootLogger();
 
     public static void main(String[] args) throws Exception {
 
