@@ -1,7 +1,10 @@
-Dec 16, 2011
+Mar 25, 2022
+  upgraded oracle jdbc dependencies
+
+Dec 16, 2021
   upgraded log4j to avoid zero-day exploit
 
-May 27, 2010
+May 27, 2020
   refactored code to clarify the logic and added better logging
   
 May 10, 2020
