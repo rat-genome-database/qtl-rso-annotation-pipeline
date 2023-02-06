@@ -119,40 +119,6 @@ public class QtlRsoAnnotation {
                 +"|" + Utils.defaultString(a.getEvidence());
     }
 
-    /*
-    public void runOld() throws Exception {
-
-        long time0 = System.currentTimeMillis();
-
-        log.info(getVersion());
-
-        Dao dao = new Dao();
-
-        // Delete manually created QTL-RSO annotations.
-        int rowsAffected = dao.deleteManuallyCreatedQtlRsoAnnotations(getCreatedBy());
-        log.info("Delete manually created annotations: "+rowsAffected);
-
-        // Mark all annotations that were created by this pipeline: Last_modified=181
-        rowsAffected = dao.markAnnotationsForProcessing(getCreatedBy());
-        log.info("Annotations marked for processing: "+rowsAffected);
-
-        // Update valid annotations with the latest terms, names, symbols and last_modified_date
-        rowsAffected = dao.updateQtlRsoAnnotations(getCreatedBy());
-        log.info("Annotations updated: "+rowsAffected);
-
-        // Delete obsolete annotations which are not touched by the update annotations updates
-        rowsAffected = dao.deleteQtlRsoAnnotations(getCreatedBy());
-        log.info("Records deleted: "+rowsAffected);
-
-        // Insert new annotations
-        rowsAffected = dao.insertQtlRsoAnnotations(getCreatedBy());
-        log.info("New records inserted: "+rowsAffected);
-
-
-        String msg = "=== OK === elapsed "+ Utils.formatElapsedTime(time0, System.currentTimeMillis());
-        log.info(msg);
-    }
-*/
     public void setVersion(String version) {
         this.version = version;
     }
