@@ -1,3 +1,6 @@
+Apr 17, 2023
+  improved exception handling
+
 Feb 06, 2023
   updated build.gradle to be gradle 6.x + compatible
 

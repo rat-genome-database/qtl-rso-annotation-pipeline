@@ -26,19 +26,6 @@ public class Dao {
     Logger logDeleteAnnots = LogManager.getLogger("deletedAnnots");
 
     /*
-    public int deleteManuallyCreatedQtlRsoAnnotations(int createdBy) throws Exception {
-        String sql = "delete from FULL_ANNOT fa\n" +
-                "WHERE fa.rgd_object_key=6 AND fa.aspect='S' AND fa.last_modified_by <> ?";
-        return adao.update(sql, createdBy);
-    }
-
-    public int markAnnotationsForProcessing(int createdBy) throws Exception {
-        String sql = "UPDATE FULL_ANNOT\n" +
-                "SET FULL_ANNOT.LAST_MODIFIED_DATE=to_date('01/01/1900', 'MM/DD/YYYY')\n" +
-                "WHERE FULL_ANNOT.LAST_MODIFIED_BY=?";
-        return adao.update(sql, createdBy);
-    }
-
     public int updateQtlRsoAnnotations(int createdBy) throws Exception {
         String sql = "UPDATE FULL_ANNOT fa\n" +
                 "SET\n" +

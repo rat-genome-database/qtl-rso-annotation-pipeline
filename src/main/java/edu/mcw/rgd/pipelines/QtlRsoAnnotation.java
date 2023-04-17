@@ -29,7 +29,7 @@ public class QtlRsoAnnotation {
         try {
             manager.run();
         } catch(Exception e) {
-            e.printStackTrace();
+            Utils.printStackTrace(e, manager.log);
             throw e;
         }
     }
