@@ -2,7 +2,7 @@
 # shell script to run QtlRsoAnnotation
 . /etc/profile
 
-APPNAME=QtlRsoAnnotation
+APPNAME=qtl-rso-annotation-pipeline
 APPDIR=/home/rgddata/pipelines/$APPNAME
 SERVER=`hostname -s | tr '[a-z]' '[A-Z]'`
 EMAIL_LIST=mtutaj@mcw.edu
