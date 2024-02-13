@@ -1,3 +1,6 @@
+Feb 13, 2024
+  updated to java 17
+
 Aug 07, 2023
   renamed to 'qtl-rso-annotation-pipeline'
 
