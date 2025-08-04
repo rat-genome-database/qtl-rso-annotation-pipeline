@@ -26,8 +26,10 @@ public class Dao {
     Logger logDeleteAnnots = LogManager.getLogger("deletedAnnots");
 
     public List<Annotation> getQtlRsoAnnotationsNotCreatedByPipeline(int createdBy) throws Exception {
-        String sql = "select * from FULL_ANNOT fa\n" +
-                "WHERE fa.rgd_object_key=6 AND fa.aspect='S' AND fa.created_by <> ?";
+        String sql = """
+            SELECT * FROM full_annot fa
+            WHERE fa.rgd_object_key=6 AND fa.aspect='S' AND fa.created_by<>?
+            """;
         return adao.executeAnnotationQuery(sql, createdBy);
     }
 
