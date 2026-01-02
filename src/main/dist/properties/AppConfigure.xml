@@ -2,7 +2,7 @@
 
 <beans>
     <bean id="manager" class="edu.mcw.rgd.pipelines.QtlRsoAnnotation" >
-        <property name="version" value="QtlRsoAnnotation  -- build Nov 14, 2025" />
+        <property name="version" value="qtl-rso-annotation-pipeline  -- build Jan 02, 2026" />
         <property name="createdBy" value="181" /><!-- pipeline id -->
     </bean>
 </beans>
