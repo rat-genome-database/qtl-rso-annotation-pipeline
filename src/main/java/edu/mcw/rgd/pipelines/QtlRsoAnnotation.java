@@ -116,7 +116,9 @@ public class QtlRsoAnnotation {
                 +"|" + Utils.defaultString(a.getXrefSource())
                 +"|" + Utils.defaultString(a.getQualifier())
                 +"|" + Utils.defaultString(a.getWithInfo())
-                +"|" + Utils.defaultString(a.getEvidence());
+                +"|" + Utils.defaultString(a.getEvidence())
+                +"|" + Utils.defaultString(a.getQualifier2())
+                +"|" + Utils.defaultString(a.getAssociatedWith());
     }
 
     public void setVersion(String version) {
