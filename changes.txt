@@ -1,3 +1,8 @@
+Mar 24, 2026
+  added MemoryMonitor to track memory usage during pipeline run
+  updated README.md
+  updated dependencies
+
 Mar 10, 2026
   annotation unique key: added qualifier2 and associatedWith fields
   updated dependencies
