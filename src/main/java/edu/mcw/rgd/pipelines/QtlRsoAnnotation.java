@@ -1,6 +1,7 @@
 package edu.mcw.rgd.pipelines;
 
 import edu.mcw.rgd.datamodel.ontology.Annotation;
+import edu.mcw.rgd.process.MemoryMonitor;
 import edu.mcw.rgd.process.Utils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -38,6 +39,9 @@ public class QtlRsoAnnotation {
 
         long time0 = System.currentTimeMillis();
 
+        MemoryMonitor memoryMonitor = new MemoryMonitor();
+        memoryMonitor.start();
+
         log.info(getVersion());
 
         Dao dao = new Dao();
@@ -58,6 +62,9 @@ public class QtlRsoAnnotation {
         List<Annotation> inRgdAnnots = dao.getInRgdAnnotations(getCreatedBy());
 
         qcAnnots(incomingAnnots, inRgdAnnots, dao);
+
+        memoryMonitor.stop();
+        log.info(memoryMonitor.getSummary());
 
         String msg = "=== OK === elapsed "+ Utils.formatElapsedTime(time0, System.currentTimeMillis());
         log.info(msg);
