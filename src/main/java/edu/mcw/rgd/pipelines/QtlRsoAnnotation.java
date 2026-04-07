@@ -81,7 +81,7 @@ public class QtlRsoAnnotation {
                 System.out.println("incoming annot duplicate");
             }
         }
-        log.info("incoming annot count: "+incomingMap.size());
+        log.info("incoming annot count: "+Utils.formatThousands(incomingMap.size()));
 
         Map<String,Annotation> inRgdMap = new HashMap<>();
         for( Annotation a: inRgdAnnots ) {
@@ -91,11 +91,11 @@ public class QtlRsoAnnotation {
                 System.out.println("in-rgd annot duplicate");
             }
         }
-        log.info("in-rgd annot count: "+inRgdMap.size());
+        log.info("in-rgd annot count: "+Utils.formatThousands(inRgdMap.size()));
 
         Set<String> matchingAnnots = new HashSet<>(incomingMap.keySet());
         matchingAnnots.retainAll(inRgdMap.keySet());
-        log.info("matching annot count: "+matchingAnnots.size());
+        log.info("matching annot count: "+Utils.formatThousands(matchingAnnots.size()));
 
         Set<String> forInsertAnnots = new HashSet<>(incomingMap.keySet());
         forInsertAnnots.removeAll(inRgdMap.keySet());
@@ -104,7 +104,7 @@ public class QtlRsoAnnotation {
                 Annotation a = incomingMap.get(key);
                 dao.insertAnnot(a);
             }
-            log.info("inserted annot count: " + forInsertAnnots.size());
+            log.info("inserted annot count: " + Utils.formatThousands(forInsertAnnots.size()));
         }
 
         Set<String> forDeleteAnnots = new HashSet<>(inRgdMap.keySet());
@@ -114,7 +114,7 @@ public class QtlRsoAnnotation {
                 Annotation a = inRgdMap.get(key);
                 dao.deleteAnnot(a);
             }
-            log.info("deleted annot count: " + forDeleteAnnots.size());
+            log.info("deleted annot count: " + Utils.formatThousands(forDeleteAnnots.size()));
         }
     }
 
