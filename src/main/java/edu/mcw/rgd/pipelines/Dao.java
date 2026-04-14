@@ -68,9 +68,9 @@ public class Dao {
 
         List<Annotation> annots = new ArrayList<Annotation>();
 
-        try( Connection conn = DataSourceFactory.getInstance().getDataSource().getConnection() ) {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+        try( Connection conn = DataSourceFactory.getInstance().getDataSource().getConnection();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql) ) {
             while( rs.next() ) {
                 String termName = rs.getString(1);
                 int qtlRgdId = rs.getInt(2);

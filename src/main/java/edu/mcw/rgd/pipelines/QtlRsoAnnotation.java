@@ -78,7 +78,7 @@ public class QtlRsoAnnotation {
             String key = createAnnotKey(a);
             Annotation prevAnnot = incomingMap.put(key, a);
             if( prevAnnot!=null ) {
-                System.out.println("incoming annot duplicate");
+                log.warn("incoming annot duplicate: "+a.dump("|"));
             }
         }
         log.info("incoming annot count: "+Utils.formatThousands(incomingMap.size()));
@@ -88,7 +88,7 @@ public class QtlRsoAnnotation {
             String key = createAnnotKey(a);
             Annotation prevAnnot = inRgdMap.put(key, a);
             if( prevAnnot!=null ) {
-                System.out.println("in-rgd annot duplicate");
+                log.warn("in-rgd annot duplicate: "+a.dump("|"));
             }
         }
         log.info("in-rgd annot count: "+Utils.formatThousands(inRgdMap.size()));
