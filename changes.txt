@@ -1,3 +1,6 @@
+Apr 16, 2026
+  use pipeline start timestamp as cutoff date for in-RGD annotations
+
 Apr 14, 2026
   fixed Statement/ResultSet leak in getIncomingAnnotations; logged duplicate annotations via log4j instead of System.out
 

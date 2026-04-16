@@ -59,7 +59,7 @@ public class QtlRsoAnnotation {
 
         List<Annotation> incomingAnnots = dao.getIncomingAnnotations(getCreatedBy());
 
-        List<Annotation> inRgdAnnots = dao.getInRgdAnnotations(getCreatedBy());
+        List<Annotation> inRgdAnnots = dao.getInRgdAnnotations(getCreatedBy(), new Date(time0));
 
         qcAnnots(incomingAnnots, inRgdAnnots, dao);
 

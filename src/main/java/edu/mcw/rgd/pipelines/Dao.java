@@ -3,7 +3,6 @@ package edu.mcw.rgd.pipelines;
 import edu.mcw.rgd.dao.DataSourceFactory;
 import edu.mcw.rgd.dao.impl.AnnotationDAO;
 import edu.mcw.rgd.datamodel.ontology.Annotation;
-import edu.mcw.rgd.process.Utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,8 +32,7 @@ public class Dao {
         return adao.executeAnnotationQuery(sql, createdBy);
     }
 
-    public List<Annotation> getInRgdAnnotations(int createdBy) throws Exception {
-        Date cutoffDate = Utils.addDaysToDate(new Date(), 1); // 1 day forward
+    public List<Annotation> getInRgdAnnotations(int createdBy, Date cutoffDate) throws Exception {
         String aspect = "S";
         return adao.getAnnotationsModifiedBeforeTimestamp(createdBy, cutoffDate, aspect);
     }
