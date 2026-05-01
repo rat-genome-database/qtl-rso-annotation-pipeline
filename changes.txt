@@ -1,3 +1,6 @@
+May 01, 2026
+  bug fix: log memory summary and elapsed time on failure path; updated dependencies
+
 Apr 16, 2026
   use pipeline start timestamp as cutoff date for in-RGD annotations
 

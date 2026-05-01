@@ -44,31 +44,34 @@ public class QtlRsoAnnotation {
 
         log.info(getVersion());
 
-        Dao dao = new Dao();
+        boolean ok = false;
+        try {
+            Dao dao = new Dao();
 
-        // if there are any QTL-RSO annotations not created by the pipeline, abort
-        List<Annotation> annots = dao.getQtlRsoAnnotationsNotCreatedByPipeline(getCreatedBy());
-        if( !annots.isEmpty() ) {
-            log.error("ABORTING PIPELINE: found QTL-RSO annotations that were not created by the pipeline");
-            log.error("    (previous logic was to delete these annotations)");
-            for( Annotation a: annots ) {
-                log.warn("   "+a.dump("|"));
+            // if there are any QTL-RSO annotations not created by the pipeline, abort
+            List<Annotation> annots = dao.getQtlRsoAnnotationsNotCreatedByPipeline(getCreatedBy());
+            if( !annots.isEmpty() ) {
+                log.error("ABORTING PIPELINE: found QTL-RSO annotations that were not created by the pipeline");
+                log.error("    (previous logic was to delete these annotations)");
+                for( Annotation a: annots ) {
+                    log.warn("   "+a.dump("|"));
+                }
+                throw new Exception("ABORT due to presence of non-pipeline QTL-RSO annotations");
             }
-            throw new Exception("ABORT due to presence of non-pipeline QTL-RSO annotations");
+
+            List<Annotation> incomingAnnots = dao.getIncomingAnnotations(getCreatedBy());
+
+            List<Annotation> inRgdAnnots = dao.getInRgdAnnotations(getCreatedBy(), new Date(time0));
+
+            qcAnnots(incomingAnnots, inRgdAnnots, dao);
+
+            ok = true;
+        } finally {
+            memoryMonitor.stop();
+            log.info(memoryMonitor.getSummary());
+            log.info((ok ? "=== OK === " : "=== FAILED === ") + "elapsed " + Utils.formatElapsedTime(time0, System.currentTimeMillis()));
+            log.info("");
         }
-
-        List<Annotation> incomingAnnots = dao.getIncomingAnnotations(getCreatedBy());
-
-        List<Annotation> inRgdAnnots = dao.getInRgdAnnotations(getCreatedBy(), new Date(time0));
-
-        qcAnnots(incomingAnnots, inRgdAnnots, dao);
-
-        memoryMonitor.stop();
-        log.info(memoryMonitor.getSummary());
-
-        String msg = "=== OK === elapsed "+ Utils.formatElapsedTime(time0, System.currentTimeMillis());
-        log.info(msg);
-        log.info("");
     }
 
     void qcAnnots( List<Annotation> incomingAnnots, List<Annotation> inRgdAnnots, Dao dao ) throws Exception {
