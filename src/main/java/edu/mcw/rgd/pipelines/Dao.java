@@ -40,14 +40,14 @@ public class Dao {
     public List<Annotation> getIncomingAnnotations(int createdBy) throws Exception {
 
         String sql = """
-            SELECT DISTINCT ot.TERM AS term,
+            SELECT DISTINCT ot.term AS term,
                    qtls.rgd_id      AS rgd_id,
                    qtls.qtl_symbol  AS symbol,
                    fa1.ref_rgd_id   AS ref,
                    qtls.qtl_name    AS name,
                    ot.term_acc      AS term_acc
-            FROM ONT_TERMS ot,
-                ONT_SYNONYMS os,
+            FROM ont_terms ot,
+                ont_synonyms os,
                 strains st,
                 rgd_qtl_strain rqs,
                 qtls,
@@ -55,11 +55,11 @@ public class Dao {
                 rgd_ids
             WHERE st.strain_key = rqs.strain_key
               AND rqs.qtl_key     = qtls.qtl_key
-              AND os.SYNONYM_NAME LIKE 'RGD ID:%'
-              AND to_number(SUBSTR(os.SYNONYM_NAME,9, 100)) = st.RGD_ID
-              AND ot.TERM_ACC                               = os.TERM_ACC
+              AND os.synonym_name LIKE 'RGD ID:%'
+              AND TO_NUMBER(SUBSTR(os.synonym_name,9, 100)) = st.rgd_id
+              AND ot.term_acc                               = os.term_acc
               AND qtls.rgd_id                               = rgd_ids.rgd_id
-              AND rgd_ids.OBJECT_STATUS                     = 'ACTIVE'
+              AND rgd_ids.object_status                     = 'ACTIVE'
               AND qtls.rgd_id                               = fa1.annotated_object_rgd_id
               AND fa1.aspect                                = 'L'
             """;

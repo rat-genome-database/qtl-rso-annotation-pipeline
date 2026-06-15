@@ -113,6 +113,12 @@ public class QtlRsoAnnotation {
         Set<String> forDeleteAnnots = new HashSet<>(inRgdMap.keySet());
         forDeleteAnnots.removeAll(incomingMap.keySet());
         if( !forDeleteAnnots.isEmpty() ) {
+            // safety floor: an empty incoming set (e.g. a broken or partial source query) would turn
+            // every in-RGD annotation into a delete candidate -- abort rather than wipe valid annotations
+            if( incomingMap.isEmpty() ) {
+                throw new Exception("ABORTING: incoming annotation set is empty -- refusing to delete "
+                        + Utils.formatThousands(forDeleteAnnots.size()) + " in-RGD annotations");
+            }
             for (String key : forDeleteAnnots) {
                 Annotation a = inRgdMap.get(key);
                 dao.deleteAnnot(a);

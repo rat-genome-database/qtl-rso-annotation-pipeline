@@ -16,6 +16,6 @@ java -Dspring.config=$APPDIR/../properties/default_db2.xml \
     -Dlog4j.configurationFile=file://$APPDIR/properties/log4j2.xml \
     -jar lib/$APPNAME.jar "$@" 2>&1 | tee run.log
 
-/home/rgddata/pipelines/OntologyLoad/run_single.sh RS -skip_download
+/home/rgddata/pipelines/ontology-load-pipeline/run_single.sh RS -skip_download
 
 mailx -s "[$SERVER] QtlRsoAnnotation pipeline OK" $EMAIL_LIST < run.log

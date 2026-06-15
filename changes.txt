@@ -1,3 +1,6 @@
+Jun 15, 2026
+  run.sh: repointed RS reload to ontology-load-pipeline; added delete safety-floor (abort on empty incoming set); SQL identifier casing; updated dependencies
+
 May 01, 2026
   bug fix: log memory summary and elapsed time on failure path; updated dependencies
 
