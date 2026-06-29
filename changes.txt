@@ -1,3 +1,6 @@
+Jun 29, 2026
+  parse strain RGD ID from synonyms robustly (INSTR/TRIM, format-independent) instead of a fixed SUBSTR offset
+
 Jun 15, 2026
   run.sh: repointed RS reload to ontology-load-pipeline; added delete safety-floor (abort on empty incoming set); SQL identifier casing; updated dependencies
 

@@ -56,7 +56,7 @@ public class Dao {
             WHERE st.strain_key = rqs.strain_key
               AND rqs.qtl_key     = qtls.qtl_key
               AND os.synonym_name LIKE 'RGD ID:%'
-              AND TO_NUMBER(SUBSTR(os.synonym_name,9, 100)) = st.rgd_id
+              AND TO_NUMBER(TRIM(SUBSTR(os.synonym_name, INSTR(os.synonym_name, ':') + 1))) = st.rgd_id
               AND ot.term_acc                               = os.term_acc
               AND qtls.rgd_id                               = rgd_ids.rgd_id
               AND rgd_ids.object_status                     = 'ACTIVE'

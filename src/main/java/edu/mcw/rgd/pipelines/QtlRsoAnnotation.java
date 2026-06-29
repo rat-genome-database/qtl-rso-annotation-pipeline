@@ -94,7 +94,7 @@ public class QtlRsoAnnotation {
                 log.warn("in-rgd annot duplicate: "+a.dump("|"));
             }
         }
-        log.info("in-rgd annot count: "+Utils.formatThousands(inRgdMap.size()));
+        log.info("in-rgd annot count:   "+Utils.formatThousands(inRgdMap.size()));
 
         Set<String> matchingAnnots = new HashSet<>(incomingMap.keySet());
         matchingAnnots.retainAll(inRgdMap.keySet());
