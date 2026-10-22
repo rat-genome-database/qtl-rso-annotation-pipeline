@@ -1,3 +1,6 @@
+Oct 22, 2026
+  migrated to postgres; updated dependencies
+
 Jun 29, 2026
   parse strain RGD ID from synonyms robustly (INSTR/TRIM, format-independent) instead of a fixed SUBSTR offset
 
